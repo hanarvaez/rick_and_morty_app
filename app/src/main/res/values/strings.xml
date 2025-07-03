@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">rick_and_morty_app</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
