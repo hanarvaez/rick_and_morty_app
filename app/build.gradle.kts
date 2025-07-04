@@ -81,6 +81,7 @@ dependencies {
 
     // Paging
     implementation(libs.paging)
+    implementation(libs.paging.compose)
 
     // Navigation
     implementation(libs.navigation.compose)
