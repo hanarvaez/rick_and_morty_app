@@ -1,6 +1,5 @@
-package co.com.monkeymobile.rick_and_morty_app.presentation.screens.ui.theme
+package co.com.monkeymobile.rick_and_morty_app.presentation.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

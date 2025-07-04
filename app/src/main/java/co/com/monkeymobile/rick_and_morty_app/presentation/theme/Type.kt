@@ -1,4 +1,4 @@
-package co.com.monkeymobile.rick_and_morty_app.presentation.screens.ui.theme
+package co.com.monkeymobile.rick_and_morty_app.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

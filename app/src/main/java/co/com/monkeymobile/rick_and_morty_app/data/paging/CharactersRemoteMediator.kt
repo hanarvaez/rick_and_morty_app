@@ -76,25 +76,23 @@ class CharactersRemoteMediator @Inject constructor(
 
             // fetch characters from api
             val response = apiService.fetchCharactersPage(pageNumberToLoad)
-            val items = response.results
+            val items = response.results.orEmpty()
 
             appDatabase.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     characterDao.clearAll()
                 }
 
-                val entities = items?.mapNotNull {
+                val entities = items.mapNotNull {
                     it.toCharacterEntity()
-                }?.toTypedArray()
+                }.toTypedArray()
 
-                entities?.let {
-                    characterDao.insertAll(*it)
-                }
+                characterDao.insertAll(*entities)
             }
 
             // End of pagination
             MediatorResult.Success(
-                endOfPaginationReached = response.info?.next == null
+                endOfPaginationReached = items.isEmpty() || response.info?.next == null
             )
 
         } catch (e: IOException) {

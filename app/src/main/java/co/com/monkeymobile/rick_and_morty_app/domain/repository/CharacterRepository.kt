@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface CharacterRepository {
 
-    suspend fun getPagedCharacters(): Flow<PagingData<Character>>
+    fun getPagedCharacters(): Flow<PagingData<Character>>
 }
