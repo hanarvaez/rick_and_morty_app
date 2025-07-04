@@ -1,4 +1,4 @@
-package co.com.monkeymobile.rick_and_morty_app.data.source.local.db.entities
+package co.com.monkeymobile.rick_and_morty_app.data.source.local.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -15,5 +15,6 @@ data class CharacterEntity(
     val name: String,
     val species: String,
     val gender: String,
-    val status: String
+    val status: String,
+    val timestamp: Long = System.currentTimeMillis()
 )
