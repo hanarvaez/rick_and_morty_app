@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
@@ -18,12 +19,14 @@ import co.com.monkeymobile.rick_and_morty_app.presentation.components.ErrorView
 import co.com.monkeymobile.rick_and_morty_app.presentation.components.LoadingItemPlaceholder
 import co.com.monkeymobile.rick_and_morty_app.presentation.components.LoadingMoreItemsIndicator
 import co.com.monkeymobile.rick_and_morty_app.presentation.components.LoadingView
+import co.com.monkeymobile.rick_and_morty_app.presentation.navigation.Screens
 import co.com.monkeymobile.rick_and_morty_app.presentation.state.UiState
 import co.com.monkeymobile.rick_and_morty_app.presentation.viewmodel.CharacterListViewModel
 
 @Composable
 fun CharacterListScreen(
     modifier: Modifier = Modifier,
+    navController: NavController,
     viewModel: CharacterListViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -53,7 +56,20 @@ fun CharacterListScreen(
                 ) { index ->
                     val character = charactersPagingItems[index]
                     if (character != null) {
-                        CharacterCard(character = character)
+                        CharacterCard(
+                            character = character,
+                            onItemClick = { character ->
+                                navController.navigate(
+                                    Screens.CharacterDetailScreen.createRoute(
+                                        "${character.id}",
+                                        character.image,
+                                        character.name,
+                                        character.species,
+                                        character.gender,
+                                        character.status
+                                    )
+                                )
+                            })
                     } else {
                         LoadingItemPlaceholder()
                     }
@@ -73,7 +89,7 @@ fun CharacterListScreen(
                             val e = loadState.refresh as LoadState.Error
                             item {
                                 ErrorView(
-                                    message = "Error al refrescar: ${e.error.localizedMessage}",
+                                    message = "Error when refreshing: ${e.error.localizedMessage}",
                                     onRetryClick = { charactersPagingItems.retry() }
                                 )
                             }
@@ -83,7 +99,7 @@ fun CharacterListScreen(
                             val e = loadState.append as LoadState.Error
                             item {
                                 ErrorRetryView(
-                                    message = "Error al cargar más: ${e.error.localizedMessage}",
+                                    message = "Error loading more items: ${e.error.localizedMessage}",
                                     onRetryClick = { charactersPagingItems.retry() }
                                 )
                             }
