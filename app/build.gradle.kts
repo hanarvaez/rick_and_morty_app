@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
@@ -77,6 +78,9 @@ dependencies {
 
     // Logging interceptor
     implementation(libs.httpLoggingInterceptor)
+
+    // Paging
+    implementation(libs.paging)
 
     // Navigation
     implementation(libs.navigation.compose)
