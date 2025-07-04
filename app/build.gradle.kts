@@ -87,6 +87,11 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 
+    // Glide
+    implementation(libs.glide)
+    ksp(libs.compiler)
+    implementation(libs.compose)
+
     // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

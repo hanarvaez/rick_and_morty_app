@@ -28,7 +28,7 @@ class CharacterListViewModel @Inject constructor(
     val charactersPagingData: Flow<PagingData<Character>> = repository.getPagedCharacters()
         .onStart { _uiState.value = UiState.Loading }
         .catch { exception ->
-            _uiState.value = UiState.Error(exception.message ?: "Error desconocido")
+            _uiState.value = UiState.Error(exception.message ?: "Unknown error")
             emit(PagingData.empty())
         }
         .onEach { pagingData ->
