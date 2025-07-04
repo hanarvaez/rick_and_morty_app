@@ -3,6 +3,7 @@ package co.com.monkeymobile.rick_and_morty_app.data.source.local.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import co.com.monkeymobile.rick_and_morty_app.domain.model.Character
 
 const val CHARACTERS_TABLE_NAME = "characters"
 
@@ -17,4 +18,14 @@ data class CharacterEntity(
     val gender: String,
     val status: String,
     val timestamp: Long = System.currentTimeMillis()
-)
+) {
+
+    fun toCharacter() = Character(
+        id = id,
+        image = image,
+        name = name,
+        species = species,
+        gender = gender,
+        status = status
+    )
+}
